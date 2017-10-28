@@ -60,7 +60,7 @@ clean_up(){
 main(){
 	echo "[*] Auto Root Tool by Daedalus"
 	download_list https://raw.githubusercontent.com/daedalus/AutoRootTool/master/c_exploitlist.txt
-	for line in `sort -u -n c_exploitlist.txt`
+	for line in $(sort -u -n c_exploitlist.txt)
 	do
 		download_exploit $line; 
 		execute_exploit
